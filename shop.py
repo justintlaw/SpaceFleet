@@ -127,3 +127,6 @@ class Shop:
                     print('Purchase successful\n')
                 else:
                     print('Not enough credits\n')
+
+        # option 2
+        

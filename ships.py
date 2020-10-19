@@ -104,7 +104,7 @@ class Fleet:
     # display basic information for a fleet
     def get_info(self):
         sOutput = format_title(self.name, '*', 3) + '\n'
-        sOutput += 'Fleet Health:'.ljust(LEFT_ALIGN) + '100%\t'
+        sOutput += 'Fleet Health:'.ljust(LEFT_ALIGN) + '{:.1f}'.format(self.get_fleet_health() / float(self.get_max_fleet_health()) * 100) + '%\t'
         # sOutput += 'Cargo Ships:'.ljust(LEFT_ALIGN) + str(self.num_cargo_ships) + '/' + str(Fleet.MAX_CARGO_SHIPS) + '\t'
         sOutput += 'Carriers:'.ljust(LEFT_ALIGN) + str(self.num_carrier_ships) + '/' + str(Fleet.MAX_CARRIER_SHIPS) + '\t'
         sOutput += 'Destroyers:'.ljust(LEFT_ALIGN) + str(self.num_destroyer_ships) + '/' + str(Fleet.MAX_DESTROYER_SHIPS) + '\t'
@@ -165,7 +165,7 @@ class Fleet:
             bFighterDied = False
 
         # sOutput = format_title(self.name, '*', 3) + '\n'
-        sOutput =  health_meter(self.get_fleet_health(), self.max_fleet_health, prefix=(self.name + ' Health:').ljust(LEFT_ALIGN_METER), length=80, printEnd='\n', fleetName=self.name)
+        sOutput =  health_meter(self.get_fleet_health(), self.get_max_fleet_health(), prefix=(self.name + ' Health:').ljust(LEFT_ALIGN_METER), length=80, printEnd='\n', fleetName=self.name)
         # sOutput += Colors.CYAN + 'Cargo Ships:'.ljust(LEFT_ALIGN) + str(num_cargo_ships) + '/' + str(Fleet.MAX_CARGO_SHIPS) + '\t'
         sOutput += Colors.CYAN + 'Carriers:'.ljust(LEFT_ALIGN) + Colors.RESET + self.get_ship_num_color(bCarrierDied, num_carrier_ships) + '/' + str(Fleet.MAX_CARRIER_SHIPS) + '\t' + Colors.RESET
         sOutput += Colors.CYAN + 'Destroyers:'.ljust(LEFT_ALIGN) + Colors.RESET + self.get_ship_num_color(bDestroyerDied, num_destroyer_ships) + '/' + str(Fleet.MAX_DESTROYER_SHIPS) + '\t' + Colors.RESET
@@ -204,6 +204,7 @@ class Fleet:
         return iHealth
     
     # update the maximum amount of health a fleet may have given the current number of ships
+    # deprecated
     def update_max_fleet_health(self):
         iHealth = 0
         for carrier in self.carriers:

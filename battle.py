@@ -214,6 +214,7 @@ class BattleQueue:
 def run_battle(oUserFleet, oEnemyFleet, sDifficulty):
     oBattleQueue = BattleQueue(oUserFleet, oEnemyFleet)
     # Before the battle, update the maximum health for each fleet for use in the health meters
+    # deprecated
     oBattleQueue.user_fleet.update_max_fleet_health()
     oBattleQueue.enemy_fleet.update_max_fleet_health()
 
@@ -297,7 +298,7 @@ def run_battle(oUserFleet, oEnemyFleet, sDifficulty):
         print(f'{sOutput}')
         # delay slightly if a ship was destroyed
         if oBattleQueue.user_fleet.ship_died or oBattleQueue.enemy_fleet.ship_died:
-            # time.sleep(0.05)
+            time.sleep(0.05)
             oBattleQueue.user_fleet.ship_died = False
             oBattleQueue.enemy_fleet.ship_died = False
 
