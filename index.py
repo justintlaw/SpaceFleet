@@ -15,22 +15,39 @@ from user import User
 from colors import Colors
 from run_mission import *
 
-# oUserFleet = Fleet(USER_FLEET_NAME)
+# player.fleet[0] = Fleet(USER_FLEET_NAME)
 
-# oUserFleet.carriers.append(create_carrier(CARRIER, oUserFleet))
-# oUserFleet.carriers.append(create_carrier(CARRIER, oUserFleet))
+# player.fleet[0].carriers.append(create_carrier(CARRIER, player.fleet[0]))
+# player.fleet[0].carriers.append(create_carrier(CARRIER, player.fleet[0]))
+# player.fleet[0].carriers.append(create_carrier(CARRIER, player.fleet[0]))
+# player.fleet[0].carriers.append(create_carrier(CARRIER, player.fleet[0]))
+# player.fleet[0].carriers.append(create_carrier(CARRIER, player.fleet[0]))
 
-# for i in oUserFleet.carriers:
+# for i in player.fleet[0].carriers:
 #     for j in range(10):
-#         i.fighters.append(create_fighter(FIGHTER, i, oUserFleet))
-# for i in range(4):
-#     oUserFleet.destroyers.append(create_destroyer(DESTROYER, oUserFleet))
-# for i in range (8):
-#     oUserFleet.corvettes.append(create_corvette(CORVETTE, oUserFleet))
+#         i.fighters.append(create_fighter(FIGHTER, i, player.fleet[0]))
+# for i in range(12):
+#     player.fleet[0].destroyers.append(create_destroyer(DESTROYER, player.fleet[0]))
+# for i in range (20):
+#     player.fleet[0].corvettes.append(create_corvette(CORVETTE, player.fleet[0]))
 
 # variables needed to run program
 # Create an instance of the user
 player = User()
+
+# TEST
+# player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+
+for i in player.fleets[0].carriers:
+    for j in range(10):
+        i.fighters.append(create_fighter(FIGHTER, i, player.fleets[0]))
+for i in range(5):
+    player.fleets[0].destroyers.append(create_destroyer(DESTROYER, player.fleets[0]))
+for i in range (10):
+    player.fleets[0].corvettes.append(create_corvette(CORVETTE, player.fleets[0]))
+# TEST
 bKeepPlaying = True
 
 # main menu

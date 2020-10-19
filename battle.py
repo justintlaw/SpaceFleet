@@ -198,7 +198,10 @@ class BattleQueue:
 
     # get a time delay appropriate to the size of the fleets so the battle doesn't end immediately
     def get_delay(self, iCombinedQueueLength):
-        iCombinedQueueLength /= 3
+        # give no delay if the queue is very large
+        if iCombinedQueueLength > 200:
+            return 0
+        iCombinedQueueLength /= 2
         fDelay = round(10 / iCombinedQueueLength, 2)
         return fDelay
 
@@ -294,11 +297,11 @@ def run_battle(oUserFleet, oEnemyFleet, sDifficulty):
         print(f'{sOutput}')
         # delay slightly if a ship was destroyed
         if oBattleQueue.user_fleet.ship_died or oBattleQueue.enemy_fleet.ship_died:
-            time.sleep(0.2)
+            # time.sleep(0.05)
             oBattleQueue.user_fleet.ship_died = False
             oBattleQueue.enemy_fleet.ship_died = False
 
-        # set a time delay based on the number of ships in the queue
+        # set a time delay for small battle so they don't end quickly
         # low number of ships should have a longer delay
         time.sleep(oBattleQueue.get_delay(len(oBattleQueue.gun_queue) + len(oBattleQueue.missile_queue)))
         

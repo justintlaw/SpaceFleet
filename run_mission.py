@@ -63,7 +63,7 @@ class MissionHandler:
         print('Starting mission: ' + oMission.description + '...\n')
         print('An enemy fleet has ambushed your convoy!')
         print('Commencing battle...\n')
-        time.sleep(5)
+        time.sleep(3.5)
 
         # run the battle
         oBattleQueue = BattleQueue(self.player.fleets[0], generate_enemy_fleet(self.player.fleets[0], DIFFICULTY[oMission.difficulty]))
