@@ -125,7 +125,7 @@ class Fleet:
             if carrier.hit_points > 0:
                 num_carrier_ships += 1
         for destroyer in self.destroyers:
-            if destroyer.hit_points > 1:
+            if destroyer.hit_points > 0:
                 num_destroyer_ships += 1
         for corvette in self.corvettes:
             if corvette.hit_points > 0:
