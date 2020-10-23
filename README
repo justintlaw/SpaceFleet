@@ -1,11 +1,11 @@
 ***
 This will become the readme file eventually
 
-KNOWN ISSUES:
--   The percentage displayed at the end of the battle is not the
-    same as the percentage displayed when the user views their fleet
-    immediately after a battle
--   When a fleet is destroyed, the program will crash if the user select "manage fleets"
-    -likely due to the fact that their are no fleets, yet the program is still attempting
-    -to interact with a fleet
-**
+Purpose of Project:
+    - To learn the basics of git and Python object oriented programming by creating a console based game
+    - While the project is a game, the goal is mostly learning and not optimization of gameplay
+    - The game itself is rather simple, however basic optimzation of gameplay may be done later
+    - The code will need to be refractored with getters and setters eventually
+    - The code should also be refractored in general as there was not much prior planning prior
+        to beginning programming
+***
