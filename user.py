@@ -8,7 +8,7 @@ class User:
 
     def __init__(self):
         self.fleets  = []
-        self.credits = 1000000
+        self.credits = 10000
         self.mission = None
 
         # create a starting fleet

@@ -62,6 +62,7 @@ print(''.ljust(LEFT_ALIGN) + 'Your ships may be attacked while doing missions, s
 
 while(bKeepPlaying):
     print(format_title('Main Menu', '-', 3))
+    print('Current Credits: ' + Colors.GREEN + str(player.credits) + Colors.RESET)
     print('1. Manage Fleets')
     print('2. View Missions')
     # add the functionality to save user data to CSV later
@@ -83,6 +84,7 @@ while(bKeepPlaying):
         # for item in player.fleets:
         #     print('Fleet ID: ' + str(item.id) + '\n' + item.get_info())
         print(player.get_all_fleet_info())
+        print('FLEET HEALTH' + str(player.fleets[0].get_fleet_health()))
 
         # allow the user to repair a fleet, add to a fleet, or take away
         sOutput = f'{Colors.BOLD}Select an option:{Colors.RESET}\t{Colors.CYAN}1. Buy a ship\t'

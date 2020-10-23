@@ -209,7 +209,7 @@ class Fleet:
         lstDestroyers = []
         lstCorvettes = []
         lstFighters = []
-        # THIS IS THE PROBLEM
+
         for carrier in self.carriers:
             # remove all carrier and all associated fighters if carrier destroyed
             if carrier.hit_points <= 0:
@@ -220,7 +220,6 @@ class Fleet:
                 for fighter in carrier.fighters:
                     if fighter.hit_points > 0:
                         lstFighters.append(fighter)
-                        #THIS ONE RIGHT HERE OFFICER
                 carrier.fighters.clear()
                 # add fighters with more than 0 health
                 for fighter in lstFighters:

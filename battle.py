@@ -315,7 +315,7 @@ def run_battle(oUserFleet, oEnemyFleet, sDifficulty):
     sOutput = oUserFleet.get_battle_info() + '\n\n'
     sOutput += oEnemyFleet.get_battle_info()
     print(f'{sOutput}')
-
+    print('FLEET HEALTH: ' + str(oUserFleet.get_fleet_health()))
     oUserFleet.update_fleet()
     oEnemyFleet.update_fleet()
 
