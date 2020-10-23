@@ -74,5 +74,6 @@ class MissionHandler:
             print('Your fleet was destroyed and its cargo was taken by the enemy!\n')
         else:
             print('Your fleet defeated the enemy fleet.')
+            print('Earned ' + Colors.GREEN + str(oMission.value) + Colors.RESET + ' credits.\n')
             oMission.success = True
             self.player.credits += oMission.value
