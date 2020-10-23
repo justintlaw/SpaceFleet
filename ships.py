@@ -132,7 +132,7 @@ class Fleet:
             carrier.hit_points = CARRIER['hit_points']
         
         player.credits -= repair_cost
-        print('Repaired ' + str(num_ships_repaired) + ' ships for ' + str(repair_cost) + ' credits') 
+        print('Repaired ' + str(num_ships_repaired) + ' ships for ' + str(repair_cost) + ' credits\n') 
         # num_ships_repaired = 0
         # lstRepairFighters = []
 

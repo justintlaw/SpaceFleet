@@ -199,7 +199,7 @@ class BattleQueue:
     # get a time delay appropriate to the size of the fleets so the battle doesn't end immediately
     def get_delay(self, iCombinedQueueLength):
         # give no delay if the queue is very large
-        if iCombinedQueueLength > 200:
+        if iCombinedQueueLength > 500:
             return 0
         iCombinedQueueLength /= 2
         fDelay = round(10 / iCombinedQueueLength, 2)
@@ -314,8 +314,8 @@ def run_battle(oUserFleet, oEnemyFleet, sDifficulty):
     print(Colors.BOLD + format_title('Battle Info', '~', 10).rjust(TITLE_RIGHT_ADJUST) + Colors.RESET + '\n')
     sOutput = oUserFleet.get_battle_info() + '\n\n'
     sOutput += oEnemyFleet.get_battle_info()
-    print(f'{sOutput}')
-    print('FLEET HEALTH: ' + str(oUserFleet.get_fleet_health()))
+    print(f'{sOutput}\n')
+
     oUserFleet.update_fleet()
     oEnemyFleet.update_fleet()
 
