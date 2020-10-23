@@ -10,6 +10,7 @@ class Fleet:
     MAX_DESTROYER_SHIPS = 20
     MAX_CORVETTE_SHIPS = 50
     next_id = 1
+    REPAIR_MODIFIER = 0.5
 
     def __init__(self, sName):
         self.id = Fleet.next_id
@@ -32,6 +33,162 @@ class Fleet:
         # used to track if a ship has died
         # must be reset to false after its been set to true
         self.ship_died = False
+
+    # get the total number of ships in a fleet
+    def get_total_ships(self):
+        num_ships = 0
+
+        for carrier in self.carriers:
+            # add the carrier
+            num_ships += 1
+            # add the fighters
+            num_ships += len(carrier.fighters)
+        num_ships += len(self.destroyers)
+        num_ships += len(self.corvettes)
+
+        return num_ships
+
+    # repair the fleet
+    # def repair_fleet(self, player, fleet):
+    #     num_ships_repaired = 0
+    #     # num_ships = self.get_total_ships()
+    #     credits_spent = 0
+    #     # must calculate before repairing any ships
+    #     total_repair_cost = self.get_fleet_repair_cost()
+
+    #     # repair all fighters
+    #     for carrier in fleet.carriers:
+    #         for fighter in carrier.fighters:
+    #             repair_cost = fighter.get_repair_cost()
+    #             # repair if enough credits
+    #             if player.credits >= repair_cost:
+    #                 fighter.hit_points = FIGHTER['hit_points']
+    #                 player.credits -= repair_cost
+    #                 credits_spent += repair_cost
+    #                 num_ships_repaired += 1
+    #     # repair all corvettes
+    #     for corvette in fleet.corvettes:
+    #         repair_cost = corvette.get_repair_cost()
+    #         # repair if enough credits
+    #         if player.credits >= repair_cost:
+    #             corvette.hit_points = CORVETTE['hit_points']
+    #             player.credits -= repair_cost
+    #             credits_spent += repair_cost
+    #             num_ships_repaired += 1
+    #     # repair all destroyers
+    #     for destroyer in fleet.destroyers:
+    #         repair_cost = destroyer.get_repair_cost()
+    #         # repair if enough credits
+    #         if player.credits >= repair_cost:
+    #             destroyer.hit_points = DESTROYER['hit_points']
+    #             player.credits -= repair_cost
+    #             credits_spent += repair_cost
+    #             num_ships_repaired += 1
+    #     # repair all carriers
+    #     for carrier in fleet.carriers:
+    #         repair_cost = carrier.get_repair_cost()
+    #         # repair if enough credits
+    #         if player.credits >= repair_cost:
+    #             carrier.hit_points = CARRIER['hit_points']
+    #             player.credits -= repair_cost
+    #             credits_spent += repair_cost
+    #             num_ships_repaired += 1
+        
+    #     # tell the user if no ships where repaired
+    #     if total_repair_cost == 0:
+    #         print('No repairs necessary.\n')
+    #     elif num_ships_repaired == 0:
+    #         print('Not enough credits to make repairs.\n')
+    #         return
+    #     else:
+    #         # print out how many ships were repaired
+    #         print('Repaired ' + str(num_ships_repaired) + ' ships for ' + str(credits_spent) + ' credits') 
+
+    def repair_fleet(self, player):
+        repair_cost = 0
+        num_ships_repaired = 0
+
+        for carrier in self.carriers:
+            # repair_cost += carrier.get_repair_cost()
+            for fighter in carrier.fighters:
+                if fighter.hit_points < FIGHTER['hit_points']:
+                    num_ships_repaired += 1
+                repair_cost += fighter.get_repair_cost()
+                fighter.hit_points = FIGHTER['hit_points']
+        for destroyer in self.destroyers:
+            if destroyer.hit_points < DESTROYER['hit_points']:
+                num_ships_repaired += 1
+            repair_cost += destroyer.get_repair_cost()
+            destroyer.hit_points = DESTROYER['hit_points']
+        for corvette in self.corvettes:
+            if corvette.hit_points < CORVETTE['hit_points']:
+                num_ships_repaired += 1
+            repair_cost += corvette.get_repair_cost()
+            corvette.hit_points = CORVETTE['hit_points']
+        for carrier in self.carriers:
+            if carrier.hit_points < CARRIER['hit_points']:
+                num_ships_repaired += 1
+            repair_cost += carrier.get_repair_cost()
+            carrier.hit_points = CARRIER['hit_points']
+        
+        player.credits -= repair_cost
+        print('Repaired ' + str(num_ships_repaired) + ' ships for ' + str(repair_cost) + ' credits') 
+        # num_ships_repaired = 0
+        # lstRepairFighters = []
+
+        # for carrier in self.carriers:
+        #     for fighter in carrier.fighters:
+        #         if fighter.hit_points < FIGHTER['hit_points']:
+        #             print('Hit points: ' + str(fighter.hit_points))
+                    # repair_cost += fighter.get_repair_cost()
+        # print('SEPARATOR')
+        # for carrier in self.carriers:
+        #     for fighter in carrier.fighters:
+        #         if fighter.hit_points < FIGHTER['hit_points']:
+        #             num_ships_repaired += 1
+        #             # print('Hit points: ' + str(fighter.hit_points))
+        #             repair_cost += fighter.get_repair_cost()
+        #             lstRepairFighters.append(fighter)
+                    # fighter.hit_points = FIGHTER['hit_points']
+        # print(len(lstRepairFighters))
+        # print(num_ships_repaired)
+        # print(lstRepairFighters)
+
+        # for fighter in lstRepairFighters:
+        #     fighter.hit_points = FIGHTER['hit_points']
+        # for destroyer in self.destroyers:
+        #     if destroyer.hit_points < DESTROYER['hit_points']:
+        #         num_ships_repaired += 1
+        #         repair_cost += destroyer.get_repair_cost()
+        #         # destroyer.hit_points = DESTROYER['hit_points']
+        # for corvette in self.corvettes:
+        #     if corvette.hit_points < CORVETTE['hit_points']:
+        #         num_ships_repaired += 1
+        #         repair_cost += corvette.get_repair_cost()
+        #         # corvette.hit_points = CORVETTE['hit_points']
+        # for carrier in self.carriers:
+        #     if carrier.hit_points < CARRIER['hit_points']:
+        #         num_ships_repaired += 1
+        #         repair_cost += carrier.get_repair_cost()
+        #         # carrier.hit_points = CARRIER['hit_points']
+
+        # print(str(repair_cost) + '\t' + str(num_ships_repaired))
+
+    # get the cost to repair the fleet
+    def get_fleet_repair_cost(self):
+        repair_cost = 0
+
+        for carrier in self.carriers:
+            for fighter in carrier.fighters:
+                repair_cost += fighter.get_repair_cost()
+        for destroyer in self.destroyers:
+            repair_cost += destroyer.get_repair_cost()
+        for corvette in self.corvettes:
+            repair_cost += corvette.get_repair_cost()
+        for carrier in self.carriers:
+            repair_cost += carrier.get_repair_cost()
+
+        return repair_cost
     
     # get the value of the fleet
     def get_fleet_value(self):
@@ -52,7 +209,7 @@ class Fleet:
         lstDestroyers = []
         lstCorvettes = []
         lstFighters = []
-    
+        # THIS IS THE PROBLEM
         for carrier in self.carriers:
             # remove all carrier and all associated fighters if carrier destroyed
             if carrier.hit_points <= 0:
@@ -63,12 +220,15 @@ class Fleet:
                 for fighter in carrier.fighters:
                     if fighter.hit_points > 0:
                         lstFighters.append(fighter)
+                        #THIS ONE RIGHT HERE OFFICER
                 carrier.fighters.clear()
                 # add fighters with more than 0 health
                 for fighter in lstFighters:
                     carrier.fighters.append(fighter)
                 # add carrier back
                 lstCarriers.append(carrier)
+            # clear the temporary fighter array after every iteration through carriers
+            lstFighters.clear()
         
         for destroyer in self.destroyers:
             # remove all destroyers that have been destroyed
@@ -235,6 +395,8 @@ class Fleet:
         iDamage = 0
         for carrier in self.carriers:
             iDamage += carrier.get_damage()
+            for fighter in carrier.fighters:
+                iDamage += fighter.get_damage()
         for destroyer in self.destroyers:
             iDamage += destroyer.get_damage()
         for corvette in self.corvettes:
@@ -361,6 +523,11 @@ class Carrier(MilitaryShip):
         self.fighters = []
         self.shields = 100
     
+    def get_repair_cost(self):
+        if self.hit_points == CARRIER['hit_points']:
+            return 0
+        return round(((CARRIER['hit_points'] - self.hit_points) / float(CARRIER['hit_points']) * Carrier.PRICE * Fleet.REPAIR_MODIFIER))
+    
     def get_num_fighters(self):
         return len(self.fighters)
 
@@ -395,6 +562,15 @@ class Fighter(MilitaryShip):
         self.fleet.num_fighter_ships += 1
         self.carrier = oCarrier
 
+    def get_repair_cost(self):
+        if self.hit_points == FIGHTER['hit_points']:
+            return 0
+
+        # print(self.hit_points)
+        cost = round(((FIGHTER['hit_points'] - self.hit_points) / float(FIGHTER['hit_points']) * Fighter.PRICE * Fleet.REPAIR_MODIFIER))
+        # print(self.hit_points)
+        return cost
+
 class Destroyer(MilitaryShip):
     NAME = 'Destroyer'
     PRICE = 30000
@@ -405,6 +581,11 @@ class Destroyer(MilitaryShip):
         self.fleet.num_destroyer_ships += 1
         self.shields = 50
 
+    def get_repair_cost(self):
+        if self.hit_points == DESTROYER['hit_points']:
+            return 0
+        return round((DESTROYER['hit_points']- self.hit_points) / float(DESTROYER['hit_points']) * Destroyer.PRICE * Fleet.REPAIR_MODIFIER)
+
 class Corvette(MilitaryShip):
     NAME = 'Corvette'
     PRICE = 10000
@@ -414,6 +595,11 @@ class Corvette(MilitaryShip):
         super().__init__(sName, iSpeed, iHitPoints, oFleet, iNumGuns, iNumMissiles)
         self.fleet.num_corvette_ships += 1
         self.shields = 25
+
+    def get_repair_cost(self):
+        if self.hit_points == CORVETTE['hit_points']:
+            return 0
+        return round((CORVETTE['hit_points'] - self.hit_points) / float(CORVETTE['hit_points']) * Corvette.PRICE * Fleet.REPAIR_MODIFIER)
 
 # returns a new carrier based on a dictionary of values
 def create_carrier(dictCarrier, oFleet):

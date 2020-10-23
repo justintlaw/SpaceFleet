@@ -67,7 +67,10 @@ def get_health_color(iteration, total):
 def get_int(iMin, iMax, sMessage):
     iInput = 0
 
-    iInput = int(input(sMessage))
+    try:
+        iInput = int(input(sMessage))
+    except:
+        return -1
 
     if (iInput >= iMin and iInput <= iMax):
         return iInput

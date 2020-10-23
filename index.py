@@ -36,7 +36,7 @@ from run_mission import *
 player = User()
 
 # TEST
-# player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
 player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
 player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
 
@@ -48,6 +48,11 @@ for i in range(5):
 for i in range (10):
     player.fleets[0].corvettes.append(create_corvette(CORVETTE, player.fleets[0]))
 # TEST
+# player.fleets[0].destroyers.append(create_destroyer(DESTROYER, player.fleets[0]))
+# player.fleets[0].corvettes.append(create_corvette(CORVETTE, player.fleets[0]))
+# player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+# player.fleets[0].carriers[0].fighters.append(create_fighter(FIGHTER, player.fleets[0].carriers[0], player.fleets[0]))
+
 bKeepPlaying = True
 
 # main menu
@@ -100,7 +105,12 @@ while(bKeepPlaying):
         elif iUserInput == 2:
             print('Not yet implemented\n')
         elif iUserInput == 3:
-            print('Not yet implemented\n')
+            sMessage = 'Credits: ' + str(player.credits) + '\t'
+            sMessage += 'Repair Cost: ' + str(player.fleets[0].get_fleet_repair_cost())
+            print(sMessage)
+            sInput = input('Continue? Y/N: ')
+            if sInput.upper() == 'Y':
+                player.fleets[0].repair_fleet(player)
         elif iUserInput == 4:
             print('Not yet implemented\n')
         elif iUserInput == 5:
