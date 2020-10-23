@@ -36,17 +36,17 @@ from run_mission import *
 player = User()
 
 # TEST
-player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
-player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
-player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+# player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+# player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
+# player.fleets[0].carriers.append(create_carrier(CARRIER, player.fleets[0]))
 
-for i in player.fleets[0].carriers:
-    for j in range(10):
-        i.fighters.append(create_fighter(FIGHTER, i, player.fleets[0]))
-for i in range(5):
-    player.fleets[0].destroyers.append(create_destroyer(DESTROYER, player.fleets[0]))
-for i in range (10):
-    player.fleets[0].corvettes.append(create_corvette(CORVETTE, player.fleets[0]))
+# for i in player.fleets[0].carriers:
+#     for j in range(10):
+#         i.fighters.append(create_fighter(FIGHTER, i, player.fleets[0]))
+# for i in range(5):
+#     player.fleets[0].destroyers.append(create_destroyer(DESTROYER, player.fleets[0]))
+# for i in range (10):
+#     player.fleets[0].corvettes.append(create_corvette(CORVETTE, player.fleets[0]))
 # TEST
 # player.fleets[0].destroyers.append(create_destroyer(DESTROYER, player.fleets[0]))
 # player.fleets[0].corvettes.append(create_corvette(CORVETTE, player.fleets[0]))

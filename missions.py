@@ -43,7 +43,7 @@ class Mission:
     # determine value of mission based on difficulty
     def get_value(self, sDifficulty, iFleetValue):
         fDifficultyRatio = DIFFICULTY[sDifficulty]
-        iValue = iFleetValue * fDifficultyRatio
+        iValue = float(iFleetValue) / 2 * fDifficultyRatio
 
         if fDifficultyRatio == DIFFICULTY['easy']:
             iValue *= 1 + Mission.LOW_RETURN
