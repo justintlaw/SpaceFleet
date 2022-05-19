@@ -6,6 +6,4 @@ Purpose of Project:
     - While the project is a game, the goal is mostly learning and not optimization of gameplay
     - The game itself is rather simple, however basic optimzation of gameplay may be done later
     - The code will need to be refractored with getters and setters eventually
-    - The code should also be refractored in general as there was not much planning prior
-        to beginning programming
 ***
